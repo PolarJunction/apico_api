@@ -1,13 +1,13 @@
 {
 	"name": "apico-api",
 	"displayName": "APICO API",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"publisher": "Polar",
 	"private": true,
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Microsoft/vscode-extension-samples"
+		"url": "https://github.com/PolarJunction/apico_api"
 	},
 	"engines": {
 		"vscode": "^1.32.0"
