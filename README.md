@@ -10,6 +10,9 @@
 <br />
 <p align="center">
   <h3 align="center">APICO API</h3>
+  <a href="https://github.com/PolarJunction/apico_api">
+    <img src="https://github.com/PolarJunction/apico_api/raw/main/images/logo.png" alt="Logo" width="640" height="320">
+  </a>
 
   <p align="center">
     Add Intellisense features for the APICO Modding API
