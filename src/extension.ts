@@ -77,6 +77,7 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(provider1, provider2, provider3);
 }
 
+/* Create a ParamaterInformation array from the api call */
 function get_parameters_arr(params: any[]): vscode.ParameterInformation[]
 {
 	const paramsArr = [];
@@ -89,6 +90,7 @@ function get_parameters_arr(params: any[]): vscode.ParameterInformation[]
 	return paramsArr;
 }
 
+/* Format the string output for the function signature */
 function get_signature_str(api_call: string, params: any[]): string
 {
 	let first = true;
@@ -114,6 +116,7 @@ function get_signature_str(api_call: string, params: any[]): string
 	return signature;
 }
 
+/* Format the markdown string output for the hover tooltip, using the api info */
 function get_hover_str(api_call: string, params: any[], desc: string ): vscode.MarkdownString
 {
 	const markdown = new vscode.MarkdownString();
@@ -134,6 +137,7 @@ function get_hover_str(api_call: string, params: any[], desc: string ): vscode.M
 	return markdown;
 }
 
+/* Used to assist with signature help, gets the current parameter using ',' trigger chars and provides the current function name */
 function parseFunction(document: vscode.TextDocument, position: vscode.Position): { functionName: string, paramIndex: number }
 {
 	let functionName = "";
