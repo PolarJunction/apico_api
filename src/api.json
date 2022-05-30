@@ -1,6 +1,915 @@
 {
     "api_calls": [
         {
+            "name": "string",
+            "description": "This is a standard string represented by \"Quotes\" as in most languages.",
+            "params": []
+        },
+        {
+            "name": "integer",
+            "description": "This is a standard integer",
+            "params": []
+        },
+        {
+            "name": "decimal",
+            "description": "This is a standard decimal number",
+            "params": []
+        },
+        {
+            "name": "boolean",
+            "description": "This is a true/false value, in these docs you will see 0 and 1 used",
+            "params": []
+        },
+        {
+            "name": "list",
+            "description": "A list is simply a list of values, represented by {1,2,3}. The values inside a list can be any datatype   and don't need to match each other.In LUA, the index for lists starts at 1!!!",
+            "params": []
+        },
+        {
+            "name": "table",
+            "description": "A table is like a 2D array or a JS object. You can give it any key, which can have any value, for example you could have {{I|  i={name=\"APICO\"}}}.A lot of the parameters either needed by the API or returned are some form of table, which   we refer to as a \"custom datatype\"",
+            "params": []
+        },
+        {
+            "name": "nil",
+            "description": "This is the null or undefined value in LUA",
+            "params": []
+        },
+        {
+            "name": "bee_definition",
+            "description": "Represents a definition for a new bee. This will add an entry into the bee book as well as give you a bee you can use and breed with.",
+            "params": [
+                {
+                    "name": "id",
+                    "type": "string",
+                    "documentation": "lowercase unique name for your bee, i.e. common, used for progress"
+                },
+                {
+                    "name": "title",
+                    "type": "string",
+                    "documentation": "name of your bee for tooltips + books, i.e. Common"
+                },
+                {
+                    "name": "latin",
+                    "type": "string",
+                    "documentation": "the latin name for your bee, shown in the book"
+                },
+                {
+                    "name": "hint",
+                    "type": "string",
+                    "documentation": "the hint to show in the book when this species hasn't been discovered yet"
+                },
+                {
+                    "name": "desc",
+                    "type": "string",
+                    "documentation": "the description to show in the book when this species has been discovered"
+                },
+                {
+                    "name": "lifespan",
+                    "type": "list(string)",
+                    "documentation": "a list of possible lifespan traits this species can spawn with, value options are Hyper, Rapid, Short, Normal, Long, Ancient, Eternal"
+                },
+                {
+                    "name": "productivity",
+                    "type": "list(string)",
+                    "documentation": "a list of possible productivity traits this species can spawn with, value options are Sluggish, Slowest,  Slow, Normal, Fast, Fastest, Brisk"
+                },
+                {
+                    "name": "fertility",
+                    "type": "list(string)",
+                    "documentation": "a list of possible fertility traits this species can spawn with, value options are Sterile, Infertile, Unlucky, Fertile, Fecund, Prolific, Swarming"
+                },
+                {
+                    "name": "stability",
+                    "type": "list(string)",
+                    "documentation": "a list of possible stability traits this species can spawn with, value options are Chaotic, Erratic, Unstable, Normal, Stable, Ordered, Pure"
+                },
+                {
+                    "name": "behaviour",
+                    "type": "list(string)",
+                    "documentation": "a list of possible behaviour traits this species can spawn with, value options are Diurnal, Nocturnal, Crepuscular, Cathemeral"
+                },
+                {
+                    "name": "climate",
+                    "type": "list(string)",
+                    "documentation": "a list of possible climate traits this species can spawn with, value options are Temperate, Tropic, Polar, Any"
+                },
+                {
+                    "name": "rainlover",
+                    "type": "boolean",
+                    "documentation": "whether this species can work while it's raining"
+                },
+                {
+                    "name": "snowlover",
+                    "type": "boolean",
+                    "documentation": "whether this species can work while it's snowing"
+                },
+                {
+                    "name": "grumpy",
+                    "type": "boolean",
+                    "documentation": "whether this species is grumpy and needs to be calmed before being worked with"
+                },
+                {
+                    "name": "produce",
+                    "type": "string",
+                    "documentation": "the item oid of the item this species' \"special produce\" that will be created when frames are extracted"
+                },
+                {
+                    "name": "chance",
+                    "type": "integer",
+                    "documentation": "the chance this bee can be formed when it's the mutation for a hybrid"
+                },
+                {
+                    "name": "requirement",
+                    "type": "string",
+                    "documentation": "the requirement for how this bee can be formed when it's the mutation for a hybrid, shown in the Predictor"
+                },
+                {
+                    "name": "bid",
+                    "type": "string",
+                    "documentation": "a unique 2 character identifier for this species to use for the beebox / beebank storage. The identifier cannot be a number, i.e. 01 as these are reserved by the base game.This must be unique across all mods, so ask your fellow modders first!"
+                },
+                {
+                    "name": "calming",
+                    "type": "list(string)",
+                    "documentation": "[Optional] if this species is grumpy, you can provide a list of flower oids that calm it, i.e. [\"flower1\", \"flower2\"]"
+                }
+            ]
+        },
+        {
+            "name": "blueprint",
+            "description": "Blueprints represent an instruction for the worldgen. Each Blueprint defines an area in the world to create a blob of land.",
+            "params": [
+                {
+                    "name": "width",
+                    "type": "integer",
+                    "documentation": "the width of the blueprint, which effects the blob of land created"
+                },
+                {
+                    "name": "height",
+                    "type": "integer",
+                    "documentation": "the height of the blueprint, which effects the blob of land created"
+                },
+                {
+                    "name": "x",
+                    "type": "integer",
+                    "documentation": "the y position in the world to put this blueprint"
+                },
+                {
+                    "name": "y",
+                    "type": "integer",
+                    "documentation": "the y position in the world to put this blueprint"
+                },
+                {
+                    "name": "type",
+                    "type": "string",
+                    "documentation": "the type of biome to set for this blueprint, options are \"forest\", \"swamp\", \"snow\", \"hallow\""
+                },
+                {
+                    "name": "dye",
+                    "type": "integer",
+                    "documentation": "[Optional] set a dye to apply to the land and nature items, valid number between 1-16"
+                }
+            ]
+        },
+        {
+            "name": "boundary",
+            "description": "Boundaries represent the bounding box for a given instance.",
+            "params": [
+                {
+                    "name": "top",
+                    "type": "integer",
+                    "documentation": "the top y position of the bounding box"
+                },
+                {
+                    "name": "left",
+                    "type": "integer",
+                    "documentation": "the left x position of the bounding box"
+                },
+                {
+                    "name": "bottom",
+                    "type": "integer",
+                    "documentation": "the bottom y position of the bounding box"
+                },
+                {
+                    "name": "right",
+                    "type": "integer",
+                    "documentation": "the right x position of the bounding box"
+                }
+            ]
+        },
+        {
+            "name": "color",
+            "description": "Colors represent an RGB color that can be defined or passed through the API.",
+            "params": [
+                {
+                    "name": "r",
+                    "type": "integer",
+                    "documentation": "the red value of the color"
+                },
+                {
+                    "name": "g",
+                    "type": "integer",
+                    "documentation": "the green value of the color"
+                },
+                {
+                    "name": "b",
+                    "type": "integer",
+                    "documentation": "the blue value of the color"
+                }
+            ]
+        },
+        {
+            "name": "coordinate",
+            "description": "Coordinates represent an x + y position",
+            "params": [
+                {
+                    "name": "x",
+                    "type": "integer",
+                    "documentation": "the x position of this co-ordinate"
+                },
+                {
+                    "name": "y",
+                    "type": "integer",
+                    "documentation": "the y position of this co-ordinate"
+                }
+            ]
+        },
+        {
+            "name": "flower_definition",
+            "description": "Represents a definition for a new flower. Flowers can be picked up, placed, crafted with, and visited by bees.Contrary to all other definitions, flowers defined through the API have an oid without your mod_name, so they will need to be unique across all mods.",
+            "params": [
+                {
+                    "name": "id",
+                    "type": "string",
+                    "documentation": "unique ID for this flower - your oid will be a combination of \"flower\" and your id, i.e. flower69"
+                },
+                {
+                    "name": "species",
+                    "type": "string",
+                    "documentation": "lowercase unique name for your flower, i.e. waspbane, used for progress"
+                },
+                {
+                    "name": "title",
+                    "type": "string",
+                    "documentation": "name of your bee for tooltips + flower, i.e. Waspbane"
+                },
+                {
+                    "name": "latin",
+                    "type": "string",
+                    "documentation": "the latin name for your flower, shown in the book"
+                },
+                {
+                    "name": "hint",
+                    "type": "string",
+                    "documentation": "the hint to show in the book when this species hasn't been discovered yet"
+                },
+                {
+                    "name": "desc",
+                    "type": "string",
+                    "documentation": "the description to show in the book when this species has been discovered"
+                },
+                {
+                    "name": "aquatic",
+                    "type": "boolean",
+                    "documentation": "whether this flower can be planted / grow on shallow water"
+                },
+                {
+                    "name": "deep",
+                    "type": "boolean",
+                    "documentation": "[Optional] twhether this flower can be planted / grow on deep water"
+                },
+                {
+                    "name": "shop_buy",
+                    "type": "integer",
+                    "documentation": "[Optional] the amount this flower can be bought for if sold by an NPC"
+                },
+                {
+                    "name": "shop_sell",
+                    "type": "integer",
+                    "documentation": "[Optional] the amount this flower can be sold for at an NPC"
+                },
+                {
+                    "name": "machines",
+                    "type": "list(string)",
+                    "documentation": "[Optional] a list of object oids that this flower can be used in, i.e.   [\"workbench\", \"sawmill\"], shown in tooltips"
+                },
+                {
+                    "name": "tools",
+                    "type": "list(string)",
+                    "documentation": "[Optional] a list of tools that can be used on this flower, i.e. [\"mouse1\", \"axe1\"],   shown in tooltips"
+                },
+                {
+                    "name": "variants",
+                    "type": "integer",
+                    "documentation": "[Optional] specifies the number of variants in your sprite image, defaults to 1"
+                },
+                {
+                    "name": "chance",
+                    "type": "integer",
+                    "documentation": "[Optional] the chance this species will be formed as a mutation, defaults to 100"
+                },
+                {
+                    "name": "smoker",
+                    "type": "list(string)",
+                    "documentation": "[Optional] a list of bee species that this flower can be used to calm in a smoker, i.e. [\"stubborn\"]"
+                }
+            ]
+        },
+        {
+            "name": "info",
+            "description": "Represents a list of information tooltips to use with a menu object's definition. This is the information shown when someone pressed the \"Help\" button for a menu.Technically this is a list of values, hence the keys below being numbers.",
+            "params": [
+                {
+                    "name": "0",
+                    "type": "string",
+                    "documentation": "the tooltip to show, i.e. 1. Input Slots"
+                },
+                {
+                    "name": "1",
+                    "type": "string",
+                    "documentation": "the color key to use for the tooltip, valid options are GREEN, BLUE, RED, YELLOW, or WHITE"
+                }
+            ]
+        },
+        {
+            "name": "ingredient",
+            "description": "Represents an ingredient for a recipe",
+            "params": [
+                {
+                    "name": "item",
+                    "type": "string",
+                    "documentation": "the item for this ingredient"
+                },
+                {
+                    "name": "amount",
+                    "type": "integer",
+                    "documentation": "the amount of this item needed for this ingredient"
+                }
+            ]
+        },
+        {
+            "name": "instance",
+            "description": "A generic representation of any instance. All instance types have the same properties, albeit some will be nil.",
+            "params": [
+                {
+                    "name": "id",
+                    "type": "integer",
+                    "documentation": "the GMS id for this instance, to use in API methods"
+                },
+                {
+                    "name": "x",
+                    "type": "integer",
+                    "documentation": "the x position of this inst"
+                },
+                {
+                    "name": "y",
+                    "type": "integer",
+                    "documentation": "the y position of this inst"
+                },
+                {
+                    "name": "oid",
+                    "type": "integer",
+                    "documentation": "the APICO \"id\" value used with the Dictionary"
+                },
+                {
+                    "name": "sprite_index",
+                    "type": "integer",
+                    "documentation": "the sprite image id used for this instance"
+                },
+                {
+                    "name": "image_index",
+                    "type": "integer",
+                    "documentation": "the sprite image \"frame\" currently set for this instance"
+                },
+                {
+                    "name": "menu_id",
+                    "type": "integer",
+                    "documentation": "the menu instance for this instance - will be nil if not a menu object instance"
+                },
+                {
+                    "name": "slots",
+                    "type": "list(slot)",
+                    "documentation": "a list of slot instances - will be nil if not a menu instance"
+                }
+            ]
+        },
+        {
+            "name": "item_definition",
+            "description": "Represents a definition for a new item. Items can be picked up, dropped, used, and crafted with.A good in-game example of an   item would be Logs",
+            "params": [
+                {
+                    "name": "id",
+                    "type": "string",
+                    "documentation": "id to use to create an oid for this item. Unless defining a flower, your new item oid will be a your   mod_id + the item id give, i.e. \"sample_mod_my_item\""
+                },
+                {
+                    "name": "name",
+                    "type": "string",
+                    "documentation": "the name of this item, shown in tooltips"
+                },
+                {
+                    "name": "category",
+                    "type": "string",
+                    "documentation": "the category for this item, shown in expanded tooltips"
+                },
+                {
+                    "name": "tooltip",
+                    "type": "string",
+                    "documentation": "the tooltip message for this item, shown in expanded tooltips"
+                },
+                {
+                    "name": "shop_key",
+                    "type": "boolean",
+                    "documentation": "whether this is a \"key\" item and so cannot be sold"
+                },
+                {
+                    "name": "shop_buy",
+                    "type": "boolean",
+                    "documentation": "the amount this item can be bought for if sold by an NPC"
+                },
+                {
+                    "name": "shop_sell",
+                    "type": "boolean",
+                    "documentation": "the amount this item can be sold for at an NPC"
+                },
+                {
+                    "name": "machines",
+                    "type": "list(string)",
+                    "documentation": "[Optional] a list of object oids that this item this can be used in, i.e. [\"workbench\",   \"sawmill\"], shown in tooltips"
+                },
+                {
+                    "name": "placeable",
+                    "type": "boolean",
+                    "documentation": "[Optional] whether this item can be placed down on the ground, will use the object oid specified   in \"obj\" if true"
+                },
+                {
+                    "name": "place_grass",
+                    "type": "boolean",
+                    "documentation": "[Optional] if placeable, this specifies if the item can only be placed on grass"
+                },
+                {
+                    "name": "place_water",
+                    "type": "boolean",
+                    "documentation": "[Optional] if placeable, this specifies if the item can only be placed on shallow water"
+                },
+                {
+                    "name": "place_deep",
+                    "type": "boolean",
+                    "documentation": "[Optional] if placeable, this specifies if the item can only be placed on deep water"
+                },
+                {
+                    "name": "durability",
+                    "type": "boolean",
+                    "documentation": "[Optional] if specified, items created with this definition will have a durability, like tools"
+                },
+                {
+                    "name": "singular",
+                    "type": "boolean",
+                    "documentation": "[Optional] if specified, items created with this definition will not be able to stack, like frames"
+                },
+                {
+                    "name": "obj",
+                    "type": "string",
+                    "documentation": "[Optional] if placeable, this specifies the object oid that will be created when the item is used"
+                },
+                {
+                    "name": "honeycore",
+                    "type": "boolean",
+                    "documentation": "[Optional] if true, this item will be bought + sold for honeycore instead of rubees"
+                }
+            ]
+        },
+        {
+            "name": "layout",
+            "description": "Represents a layout to use with a menu object's definition. This tells the game where you want the slots in relation to the menu's top left coordinate as well as what can or can't be put in that slot.Technically this is a list of values, hence the keys below being numbers.",
+            "params": [
+                {
+                    "name": "0",
+                    "type": "string",
+                    "documentation": "the x position for the slot, relative to the menu's top left coordinate"
+                },
+                {
+                    "name": "1",
+                    "type": "string",
+                    "documentation": "the y position for the slot, relative to the menu's top left coordinate"
+                },
+                {
+                    "name": "2",
+                    "type": "string",
+                    "documentation": "[Optional] the type of slot this is, valid options are Input, Liquid Input, Output, Liquid Output, or Shop. Output slots cannot have items put in them."
+                },
+                {
+                    "name": "3",
+                    "type": "list(string)",
+                    "documentation": "[Optional] if the type of slot is Input or Liquid Input, this let's you define the items that are allowed in them, i.e. [\"log\", \"sticks1\"]"
+                }
+            ]
+        },
+        {
+            "name": "menu_definition",
+            "description": "Represents a definition for a new menu object. Menu Objects are similar to objects but can be clicked to open a menu, like say a Sawbench.They can be also given logic to run all the time so are a powerful tool for your mods.",
+            "params": [
+                {
+                    "name": "id",
+                    "type": "string",
+                    "documentation": "id to use to create an oid for this object. Your new object oid will be a your mod_id + the object id give, i.e. \"sample_mod_my_object\""
+                },
+                {
+                    "name": "name",
+                    "type": "string",
+                    "documentation": "the name of this object shown in tooltips"
+                },
+                {
+                    "name": "category",
+                    "type": "string",
+                    "documentation": "the category for this object, shown in expanded tooltips"
+                },
+                {
+                    "name": "tooltip",
+                    "type": "string",
+                    "documentation": "the tooltip message for this object, shown in expanded tooltips"
+                },
+                {
+                    "name": "shop_key",
+                    "type": "boolean",
+                    "documentation": "whether this is a \"key\" object and so cannot be sold"
+                },
+                {
+                    "name": "shop_buy",
+                    "type": "boolean",
+                    "documentation": "the amount this object can be bought for if sold by an NPC"
+                },
+                {
+                    "name": "shop_sell",
+                    "type": "boolean",
+                    "documentation": "the amount this object can be sold for at an NPC"
+                },
+                {
+                    "name": "layout",
+                    "type": "list(layout)",
+                    "documentation": "a list of layouts to set the slots for this objects menu"
+                },
+                {
+                    "name": "info",
+                    "type": "list(info)",
+                    "documentation": "a list of information to show when the menu help button is pressed"
+                },
+                {
+                    "name": "buttons",
+                    "type": "list(string)",
+                    "documentation": "a list of buttons for this objects menu to have, valid options are Help, Target, Sort, Move, Close"
+                },
+                {
+                    "name": "machines",
+                    "type": "list(string)",
+                    "documentation": "[Optional] a list of object oids that this object this can be used in, i.e.   [\"workbench\", \"sawmill\"], shown in tooltips"
+                },
+                {
+                    "name": "tools",
+                    "type": "list(string)",
+                    "documentation": "[Optional] a list of tools that can be used on this object, i.e. [\"mouse1\", \"axe1\"],   shown in tooltips"
+                },
+                {
+                    "name": "nature",
+                    "type": "boolean",
+                    "documentation": "[Optional] this specifies if the object can only be placed on grass"
+                },
+                {
+                    "name": "aquatic",
+                    "type": "boolean",
+                    "documentation": "[Optional] this specifies if the object can only be placed on shallow water"
+                },
+                {
+                    "name": "deep",
+                    "type": "boolean",
+                    "documentation": "[Optional] this specifies if the object can only be placed on deep water"
+                },
+                {
+                    "name": "invisible",
+                    "type": "boolean",
+                    "documentation": "[Optional] if true, this object will not be drawn - it's bounding box will still be interactable though!"
+                },
+                {
+                    "name": "center",
+                    "type": "boolean",
+                    "documentation": "[Optional] if true, when this object's menu opens it will automatically be put in the center of the screen"
+                }
+            ]
+        },
+        {
+            "name": "npc_definition",
+            "description": "Represents a definition for a new NPC. NPCs are basically just menu objects that move around and have a special second menu for their shop.",
+            "params": [
+                {
+                    "name": "id",
+                    "type": "integer",
+                    "documentation": "id to use for the npc, must be unique across all mods"
+                },
+                {
+                    "name": "name",
+                    "type": "string",
+                    "documentation": "the name of this NPC, shown in tooltips and their dialogue"
+                },
+                {
+                    "name": "pronouns",
+                    "type": "string",
+                    "documentation": "the pronouns for this NPC, shown in their dialogue"
+                },
+                {
+                    "name": "tooltip",
+                    "type": "string",
+                    "documentation": "the tooltip message for this NPC, usually just a greeting message"
+                },
+                {
+                    "name": "specials",
+                    "type": "list(string)",
+                    "documentation": "a list of at least 3 item oids that this NPC will have in it's special item pool"
+                },
+                {
+                    "name": "stock",
+                    "type": "list(string)",
+                    "documentation": "a list of up to 10 item oids that this NPC will have as it's shop stock"
+                },
+                {
+                    "name": "greeting",
+                    "type": "string",
+                    "documentation": "the default greeting message shown in the dialogue menu when it opens"
+                },
+                {
+                    "name": "dialogue",
+                    "type": "list(string)",
+                    "documentation": "a list of dialogue to show one after the other when a player clicks the \"talk\" button"
+                },
+                {
+                    "name": "walking",
+                    "type": "boolean",
+                    "documentation": "[Optional] whether this NPC will walk around or stay still"
+                },
+                {
+                    "name": "shop",
+                    "type": "boolean",
+                    "documentation": "[Optional] whether this NPC will have a shop or just be dialogue only"
+                }
+            ]
+        },
+        {
+            "name": "obj_definition",
+            "description": "Represents a definition for a new object. Objects can be picked up, dropped, placed, clicked on, and crafted with.A good   in-game example of an object would be the Bench",
+            "params": [
+                {
+                    "name": "id",
+                    "type": "string",
+                    "documentation": "id to use to create an oid for this object. Unless defining a flower, your new object oid will be a your   mod_id + the object id give, i.e. \"sample_mod_my_object\""
+                },
+                {
+                    "name": "name",
+                    "type": "string",
+                    "documentation": "the name of this object shown in tooltips"
+                },
+                {
+                    "name": "category",
+                    "type": "string",
+                    "documentation": "the category for this object, shown in expanded tooltips"
+                },
+                {
+                    "name": "tooltip",
+                    "type": "string",
+                    "documentation": "the tooltip message for this object, shown in expanded tooltips"
+                },
+                {
+                    "name": "shop_key",
+                    "type": "boolean",
+                    "documentation": "whether this is a \"key\" object and so cannot be sold"
+                },
+                {
+                    "name": "shop_buy",
+                    "type": "boolean",
+                    "documentation": "the amount this object can be bought for if sold by an NPC"
+                },
+                {
+                    "name": "shop_sell",
+                    "type": "boolean",
+                    "documentation": "the amount this object can be sold for at an NPC"
+                },
+                {
+                    "name": "machines",
+                    "type": "list(string)",
+                    "documentation": "[Optional] a list of object oids that this object this can be used in, i.e.   [\"workbench\", \"sawmill\"], shown in tooltips"
+                },
+                {
+                    "name": "tools",
+                    "type": "list(string)",
+                    "documentation": "[Optional] a list of tools that can be used on this object, i.e. [\"mouse1\", \"axe1\"],   shown in tooltips"
+                },
+                {
+                    "name": "plass_grass",
+                    "type": "boolean",
+                    "documentation": "[Optional] this specifies if the object can only be placed on grass"
+                },
+                {
+                    "name": "place_water",
+                    "type": "boolean",
+                    "documentation": "[Optional] this specifies if the object can only be placed on shallow water"
+                },
+                {
+                    "name": "place_deep",
+                    "type": "boolean",
+                    "documentation": "[Optional] this specifies if the object can only be placed on deep water"
+                },
+                {
+                    "name": "durability",
+                    "type": "boolean",
+                    "documentation": "[Optional] if specified, object created with this definition will have a durability, like tools"
+                },
+                {
+                    "name": "singular",
+                    "type": "boolean",
+                    "documentation": "[Optional] if specified, objects created with this definition will not be able to stack, like frames"
+                },
+                {
+                    "name": "honeycore",
+                    "type": "boolean",
+                    "documentation": "[Optional] if true, this objects will be bought + sold for honeycore instead of rubees"
+                },
+                {
+                    "name": "invisible",
+                    "type": "boolean",
+                    "documentation": "[Optional] if true, this object will not be drawn - it's bounding box will still be interactable though!"
+                },
+                {
+                    "name": "has_shadow",
+                    "type": "boolean",
+                    "documentation": "[Optional] if true, a shadow will be automatically drawn under this object"
+                },
+                {
+                    "name": "pickable",
+                    "type": "boolean",
+                    "documentation": "[Optional] if true, you'll be able to pick up this item with the mouse"
+                },
+                {
+                    "name": "variants",
+                    "type": "integer",
+                    "documentation": "[Optional] for nature objects, like trees, this specifies the amount of variants within the sprite   for the object"
+                },
+                {
+                    "name": "growth",
+                    "type": "string",
+                    "documentation": "[Optional] if set, after the object is created a timer will start, after which a new object will be   created instead, for example saplings in the game use {{I|i[\"tree 360 560\"]}} to make a tree randomly after 360-560 seconds"
+                }
+            ]
+        },
+        {
+            "name": "quest_definition",
+            "description": "Represents a quest definition to make a new quest in the book.",
+            "params": [
+                {
+                    "name": "id",
+                    "type": "string",
+                    "documentation": "the unique id for your quest, for use with the progress handler"
+                },
+                {
+                    "name": "title",
+                    "type": "string",
+                    "documentation": "the title of your quest as shown in the book chapter list"
+                },
+                {
+                    "name": "reqs",
+                    "type": "list(string)",
+                    "documentation": "the requirements needed for the quest to be ready, e.g. [\"axe1@2\"] would mean 2 wooden axes are needed to complete"
+                },
+                {
+                    "name": "icon",
+                    "type": "string",
+                    "documentation": "the item oid of the item to use for the icon in the overview section of the book"
+                },
+                {
+                    "name": "reward",
+                    "type": "string",
+                    "documentation": "the reward that will be given when the quest is handed in, e.g. \"honeycore1@10\" would give 10 honeycore crystals"
+                },
+                {
+                    "name": "unlock",
+                    "type": "list(string)",
+                    "documentation": "a list of quests ids to unlock when this quest is complete"
+                }
+            ]
+        },
+        {
+            "name": "quest_line",
+            "description": "Represents a line in a page of a quest, along with any text or images you want to show.",
+            "params": [
+                {
+                    "name": "text",
+                    "type": "string",
+                    "documentation": "the text for this line"
+                },
+                {
+                    "name": "color",
+                    "type": "string",
+                    "documentation": "[Optional] the color key for the text, defaults to \"FONT_BOOK\""
+                },
+                {
+                    "name": "gif",
+                    "type": "string",
+                    "documentation": "[Optional] instead of text you can show a sprite by specifying the oid of the sprite. The sprite should be 148 pixels width and either 44, 64, or 84 pixel high."
+                },
+                {
+                    "name": "width",
+                    "type": "integer",
+                    "documentation": "[Optional] if a gif is specified this sets the height of the gif, should be 44, 64, or 84"
+                }
+            ]
+        },
+        {
+            "name": "recipe",
+            "description": "Represents a crafting recipe for the workbench.",
+            "params": [
+                {
+                    "name": "item",
+                    "type": "string",
+                    "documentation": "the item oid that this recipe will craft"
+                },
+                {
+                    "name": "recipe",
+                    "type": "list(ingredient)",
+                    "documentation": "the ingredients to use for this recipe"
+                },
+                {
+                    "name": "total",
+                    "type": "integer",
+                    "documentation": "[Optional] the total amount of the item you get when crafted, defaults to 1"
+                }
+            ]
+        },
+        {
+            "name": "scripts",
+            "description": "Represents a set of script definitions to use when defining a custom menu object. Each script must be a valid function found in your mod.lua file.",
+            "params": [
+                {
+                    "name": "define",
+                    "type": "string",
+                    "documentation": "a script to run when the menu object is first defined, allowing you to set custom properties and stuff"
+                },
+                {
+                    "name": "change",
+                    "type": "string",
+                    "documentation": "a script to run when a slot inside the menu object gets changed"
+                },
+                {
+                    "name": "tick",
+                    "type": "string",
+                    "documentation": "a script to run every tick (0.1s) for that menu object, as long as it's active"
+                },
+                {
+                    "name": "draw",
+                    "type": "string",
+                    "documentation": "a script to run every draw cycle for this menu object, only when the object's menu is actually open"
+                }
+            ]
+        },
+        {
+            "name": "stats",
+            "description": "All slots + items have a stats property that is used for certain items that need to store specific extra properties - this is used for all bee \"items\", but also for canisters and frames.For bees, you can find the following properties from the stats property:",
+            "params": [
+                {
+                    "name": "species",
+                    "type": "string",
+                    "documentation": "the dominent species for the bee, i.e. common"
+                },
+                {
+                    "name": "queen",
+                    "type": "string",
+                    "documentation": "whether this bee is a queen or not"
+                },
+                {
+                    "name": "beetrice",
+                    "type": "boolean",
+                    "documentation": "whether this bee is a descendent of beetrice - the first bee you get from the book"
+                },
+                {
+                    "name": "microscoped",
+                    "type": "boolean",
+                    "documentation": "whether a bee has been microscoped (so people can't microscope the same bee 3 times)"
+                },
+                {
+                    "name": "shiny",
+                    "type": "boolean",
+                    "documentation": "whether this bee is a blessed variant"
+                },
+                {
+                    "name": "d_traits",
+                    "type": "table",
+                    "documentation": "this table contains a key for every bee trait with the bee's dominent value for that trait, keys included any custom defined traits through api_define_trait() as well as the following standard traits: species, lifespan, productivity, fertility, behaviour, climate, stability, pluvioplhile, chionophile and aggressive. Dominent traits are what determines how the bee acts in beehives."
+                },
+                {
+                    "name": "r_traits",
+                    "type": "table",
+                    "documentation": "this table contains a key for every bee trait with the bee's recessive value for that trait, keys included any custom defined traits through api_define_trait() as well as the following standard traits: species, lifespan, productivity, fertility, behaviour, climate, stability, pluvioplhile, chionophile and aggressive."
+                }
+            ]
+        },
+        {
             "name": "click",
             "description": "This hook is called whenever a player clicks on something with the mouse or uses the \"action\" button on their gamepad. You can find out what key was pressed with the api_get_key_down() or api_get_key_pressed() methods.As this is a single hook for the whole mod you'll probably want to split out the calls within this method to other modules to keep things managable.",
             "params": []
